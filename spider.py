@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 from link_finder import LinkFinder
-from common import all, create_data_files, create_project_dir, file_to_set
+from common import *
 
 
 class Spider:
@@ -40,9 +40,14 @@ class Spider:
         Spider.crawled.add(page_url)
         Spider.update_files()
 
-    def add_links_queue(self, links_to_add: set) -> None:
+    @staticmethod
+    def add_links_queue(links_to_add: set) -> None:
         for url in links_to_add:
-            pass
+            if (url in Spider.queue or url in Spider.crawled):
+                continue
+            if (Spider.homepage_url not in url):
+                continue
+            Spider.queue.add(url)
 
     @staticmethod
     def gather_links(page_url:str) -> set():
@@ -61,4 +66,5 @@ class Spider:
         
     @staticmethod
     def update_files():
-        pass
+        set_to_file(Spider.queue, Spider.queue_file)
+        set_to_file(Spider.crawled, Spider.crawled_file)
