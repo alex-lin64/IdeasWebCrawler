@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 from urllib import parse
 
+
 class LinkFinder(HTMLParser):
 
     def __init__(self, homepage_url:str, page_url:str) -> None:

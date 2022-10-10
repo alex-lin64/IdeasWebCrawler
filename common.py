@@ -1,6 +1,7 @@
 from inspect import _void
 import os
 
+
 # New website crawled saved to new folder
 def create_project_dir(dir_path:str) -> None:
     if not os.path.exists(dir_path):
